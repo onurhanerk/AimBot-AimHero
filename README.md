@@ -5,7 +5,7 @@
 Inspired from Sentdex's Work on his "Python Plays GTA V" series
 Thanks to, Tensorflow Object Detection API
 
->>>[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero")
+[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero")
 
 ## Instructions
 
