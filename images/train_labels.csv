@@ -1,0 +1,10 @@
+filename,width,height,class,xmin,ymin,xmax,ymax
+target1.jpg,154,130,Target,20,13,144,123
+target2.jpg,130,114,Target,19,14,118,108
+target3.jpg,84,73,Target,11,14,68,70
+target4.jpg,81,81,Target,3,15,77,77
+target5.jpg,170,56,Target,18,7,58,44
+target5.jpg,170,56,Target,41,10,67,36
+target5.jpg,170,56,Target,118,9,151,39
+target7.jpg,130,50,Target,78,1,111,32
+target7.jpg,130,50,Target,6,6,36,38

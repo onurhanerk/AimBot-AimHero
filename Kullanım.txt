@@ -1,0 +1,64 @@
+
+
+- Ýmages / train / içine resimleri at
+- Label_Img programý ile resimleri kýraparak xml ye çevir.
+- XML_to_CSV klasorunden xml_to_csv yi çalýþtýrarak xml dosyasýný csv ye çevir. Bu, \ object_detection \ images klasöründe bir train_labels.csv ve test_labels.csv dosyasý oluþturur.
+- Ardýndan, generate_tfrecord.py dosyasýný bir metin düzenleyicide açýn. 31. satýrdan baþlayarak etiket haritasýný kendi etiket haritanýzla deðiþtirin, burada her nesneye bir kimlik numarasý atanýr. Adým 5b'deki labelmap.pbtxt dosyasýný yapýlandýrýrken ayný numara atamasý kullanýlacaktýr.
+
+- Ardýndan, bu komutlarý \ object_detection klasöründen yayýnlayarak TFRecord dosyalarýný oluþturun:
+python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=images\train --output_path=train.record
+python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record
+
+-Bunlar \ object_detection içinde bir train.record ve bir test.record dosyasý oluþturur. Bunlar yeni nesne algýlama sýnýflandýrýcýsýný eðitmek için kullanýlacaktýr.
+
+
+- Þimdi 5. Etiket Haritasý Oluþturun ve Eðitimi Yapýlandýrýn Eðitimden önce yapýlacak en son þey bir etiket haritasý oluþturmak ve eðitim konfigürasyon dosyasýný düzenlemek gerekir.
+- 5a. Etiket haritasý Etiket haritasý, eðiticiye, sýnýf adlarýnýn sýnýf kimlik numaralarýna eþlenmesini tanýmlayarak her nesnenin ne olduðunu söyler. Yeni bir dosya oluþturmak için bir metin düzenleyici kullanýn ve C: \ tensorflow1 \ models \ research \ object_detection \ training labelmap.pbtxt olarak kaydedin. (Dosya türünün .pbtxt, .txt deðil olduðundan emin olun!) Metin düzenleyicide, aþaðýdaki þekilde etiket haritasýný kopyalayýn veya yazýn (aþaðýdaki örnek, Pinochle Deck Card Detector'umun etiket haritasýdýr):
+
+- C: \ tensorflow1 \ models \ research \ object_detection \ samples \ config dosyasýna gidin ve faster_rcnn_inception_v2_pets.config dosyasýný \ object_detection \ training dizinine kopyalayýn. Ardýndan dosyayý bir metin düzenleyicisiyle açýn. .config dosyasýnda, çoðunlukla sýnýflarýn ve örneklerin sayýsýný deðiþtirerek ve eðitim yollarýna dosya yollarýný ekleyerek yapmak için birkaç deðiþiklik vardýr.
+NOT: Daha hýzlý_rcnn_inception_v2_pets.config dosyasýnda aþaðýdaki deðiþiklikleri yapýn. Not: Yollar tek eðik çizgi ile girilmelidir (ters eðik çizgi), ya da TensorFlow modeli eðitmeye çalýþýrken bir dosya yolu hatasý verecektir! Ayrýca, yollar tek týrnak iþaretleri (') deðil, çift týrnak iþareti (") olmalýdýr.
+
+- Satýr 9. Sayýsallaþtýrýcýnýn sýnýflandýrýcýnýn algýlamasýný istediðiniz farklý nesne sayýsýna deðiþtirin. Yukarýdaki basketbol, gömlek ve ayakkabý detektörü için num_classes olacaktýr: 3
+
+- Line 110. fine_tune_checkpoint deðerini deðiþtir.
+
+    fine_tune_checkpoint : "C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"
+
+
+- Line 126 ve 128 i deðiþtir. 
+
+- Line 132 image\test içindeki görüntü sayýsý ile deðiþtir.
+
+- Line 140 ve 1421 biçimlendir.
+
+--- NOT:
+	 Þimdi bu kodu girerek  eðitimi Baþlat.
+python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
+
+--- NOT:
+ 	 Tensorboard üzerinden eðitimi görebilirsin.
+python -m tensorboard.main --logdir=training
+
+
+
+
+
+- Eðitim tamamlandý. Sýrada dondurulmuþ çýkarým grafiði oluþturmak var. (.pb dosyasý)  Object_detection klasöründen, þu komutu veriniz: “model.ckpt-XXXX” içindeki “XXXX”, eðitim klasöründeki en yüksek numaralý .ckpt dosyasýyla deðiþtirilmelidir: XXXX En büyük step no.
+Bu, \ object_detection \ inference_graph klasöründe bir frozen_inference_graph.pb dosyasý oluþturur. .pb dosyasý nesne algýlama sýnýflandýrýcýsýný içerir.
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph
+
+
+
+
+- Dosyalar oluþturuldu. Þimdi bu dosyalarýn kullanýmýna geldik. Python komut dosyalarýný çalýþtýrmadan önce, betikteki NUM_CLASSES deðiþkenini, tespit etmek istediðiniz sýnýf sayýsýna eþit olacak þekilde deðiþtirmeniz gerekir. (Pinochle Kart Dedektörüm için, tespit etmek istediðim altý kart var, bu yüzden NUM_CLASSES = 6)
+
+- Nesne algýlayýcýnýzý test etmek için nesnenin veya nesnelerin bir resmini \ object_detection klasörüne taþýyýn ve resmin dosya adýyla eþleþmesi için Object_detection_image.py dosyasýndaki IMAGE_NAME deðiþkenini deðiþtirin. Alternatif olarak, nesnelerin bir videosunu (Object_detection_video.py kullanarak) kullanabilir veya sadece bir USB web kamerasýný takabilir ve nesneye (Object_detection_webcam.py kullanarak) yönlendirebilirsiniz.
+
+
+
+
+
+
+
+
