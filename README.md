@@ -1,6 +1,6 @@
 # AimHero - AimBot
-# Using Tensorflow Object Detection API
-# Tested on AimHero v5
+## Using Tensorflow Object Detection API
+### Tested on AimHero v5
 
 Inspired from Sentdex's Work on his "Python Plays GTA V" series
 Thanks to, Tensorflow Object Detection API
@@ -13,8 +13,10 @@ Thanks to, Tensorflow Object Detection API
 4) Ardından, generate_tfrecord.py dosyasını bir metin düzenleyicide açın. 31. satırdan başlayarak etiket haritasını kendi etiket haritanızla değiştirin, burada her nesneye bir kimlik numarası atanır. Adım 5b'deki labelmap.pbtxt dosyasını yapılandırırken aynı numara ataması kullanılacaktır.
 
 5) Ardından, bu komutları \ object_detection klasöründen yayınlayarak TFRecord dosyalarını oluşturun:
+```
 python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=images\train --output_path=train.record
 python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record
+```
 
 6)Bunlar \ object_detection içinde bir train.record ve bir test.record dosyası oluşturur. Bunlar yeni nesne algılama sınıflandırıcısını eğitmek için kullanılacaktır.
 
@@ -29,7 +31,7 @@ NOT: Daha hızlı_rcnn_inception_v2_pets.config dosyasında aşağıdaki değiş
 
 11) Line 110. fine_tune_checkpoint değerini değiştir.
 
-    fine_tune_checkpoint : "C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"
+   >fine_tune_checkpoint : "C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"
 
 
 12) Line 126 ve 128 i değiştir. 
@@ -40,21 +42,23 @@ NOT: Daha hızlı_rcnn_inception_v2_pets.config dosyasında aşağıdaki değiş
 
 --- NOT:
 	 Şimdi bu kodu girerek  eğitimi Başlat.
-python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
-
+	 ```
+	python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
+	```
 --- NOT:
  	 Tensorboard üzerinden eğitimi görebilirsin.
-python -m tensorboard.main --logdir=training
-
+	```
+	python -m tensorboard.main --logdir=training
+	```
 
 
 
 
 15) Eğitim tamamlandı. Sırada dondurulmuş çıkarım grafiği oluşturmak var. (.pb dosyası)  Object_detection klasöründen, şu komutu veriniz: “model.ckpt-XXXX” içindeki “XXXX”, eğitim klasöründeki en yüksek numaralı .ckpt dosyasıyla değiştirilmelidir: XXXX En büyük step no.
 Bu, \ object_detection \ inference_graph klasöründe bir frozen_inference_graph.pb dosyası oluşturur. .pb dosyası nesne algılama sınıflandırıcısını içerir.
-
+```
 python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph
-
+```
 
 
 
@@ -65,4 +69,4 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 
 
 17) windowtarget-v1.py dosyasını çalıştır.
-    ```
+    
