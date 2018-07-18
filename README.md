@@ -5,7 +5,7 @@
 Inspired from Sentdex's Work on his "Python Plays GTA V" series
 Thanks to, Tensorflow Object Detection API
 
-[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero")
+[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero") [![AimBot](http://img.youtube.com/vi/L-Ln1zp_ycA/0.jpg)](http://www.youtube.com/watch?v=L-Ln1zp_ycA "AimHero")
 
 ## Instructions
 
@@ -71,4 +71,6 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 17) Nesne algılayıcınızı test etmek için nesnenin veya nesnelerin bir resmini `\ object_detection` klasörüne taşıyın ve resmin dosya adıyla eşleşmesi için `Object_detection_image.py` dosyasındaki `IMAGE_NAME` değişkenini değiştirin. Alternatif olarak, nesnelerin bir videosunu (Object_detection_video.py kullanarak) kullanabilir veya sadece bir USB web kamerasını takabilir ve nesneye (Object_detection_webcam.py kullanarak) yönlendirebilirsiniz.
 
 18) windowtarget-v1.py dosyasını çalıştırın.
+
+
     
