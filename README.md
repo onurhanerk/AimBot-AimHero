@@ -7,7 +7,7 @@ Thanks to, Tensorflow Object Detection API
 
 ## Instructions
 
-1) İmages / train / içine model dosyalarınızın resimlerini at.
+1) 'İmages / train /' içine model dosyalarınızın resimlerini at.
 2) Label_Img programı ile resimleri kıraparak xml ye çevir.
 3) XML_to_CSV klasorunden xml_to_csv yi çalıştırarak xml dosyasını csv ye çevir. Bu, \ object_detection \ images klasöründe bir train_labels.csv ve test_labels.csv dosyası oluşturur.
 4) Ardından, generate_tfrecord.py dosyasını bir metin düzenleyicide açın. 31. satırdan başlayarak etiket haritasını kendi etiket haritanızla değiştirin, burada her nesneye bir kimlik numarası atanır. Adım 5b'deki labelmap.pbtxt dosyasını yapılandırırken aynı numara ataması kullanılacaktır.
