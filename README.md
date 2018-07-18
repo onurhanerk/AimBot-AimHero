@@ -5,7 +5,7 @@
 Inspired from Sentdex's Work on his "Python Plays GTA V" series
 Thanks to, Tensorflow Object Detection API
 
-[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero")
+>>>[![AimBot](http://img.youtube.com/vi/EgH3zqYV_2g/0.jpg)](http://www.youtube.com/watch?v=EgH3zqYV_2g "AimHero")
 
 ## Instructions
 
@@ -21,7 +21,7 @@ python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=imag
 python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record
 ```
 
-6)Bunlar `\ object_detection` içinde bir train.record ve bir test.record dosyası oluşturur. Bunlar yeni nesne algılama sınıflandırıcısını eğitmek için kullanılacaktır.
+6) Bunlar `\ object_detection` içinde bir train.record ve bir test.record dosyası oluşturur. Bunlar yeni nesne algılama sınıflandırıcısını eğitmek için kullanılacaktır.
 
 
 7) Şimdi 5. Etiket Haritası Oluşturun ve Eğitimi Yapılandırın. Eğitimden önce yapılacak en son şey bir etiket haritası oluşturmak ve eğitim konfigürasyon dosyasını düzenlemek gerekir.
@@ -65,7 +65,8 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 >_NOT: “model.ckpt-XXXX” içindeki “XXXX”, eğitim klasöründeki en yüksek numaralı .ckpt dosyasıyla değiştirilmelidir: XXXX En büyük step no' su olmalıdır. Bu, `\ object_detection \ inference_graph` klasöründe bir `frozen_inference_graph.pb` dosyası oluşturur. .pb dosyası nesne algılama sınıflandırıcısını içerir.
 
 
-16) Dosyalar oluşturuldu. Şimdi bu dosyaların kullanımına geldik. Python komut dosyalarını çalıştırmadan önce, betikteki `NUM_CLASSES` değişkenini, tespit etmek istediğiniz sınıf sayısına eşit olacak şekilde değiştirmeniz gerekir. (NUM_CLASSES = 3)
+16) Dosyalar oluşturuldu. Şimdi bu dosyaların kullanımına geldik. Python komut dosyalarını çalıştırmadan önce, betikteki `NUM_CLASSES` değişkenini, tespit etmek istediğiniz sınıf sayısına eşit olacak şekilde değiştirmeniz gerekir. 
+>(NUM_CLASSES = 3)
 
 17) Nesne algılayıcınızı test etmek için nesnenin veya nesnelerin bir resmini `\ object_detection` klasörüne taşıyın ve resmin dosya adıyla eşleşmesi için `Object_detection_image.py` dosyasındaki `IMAGE_NAME` değişkenini değiştirin. Alternatif olarak, nesnelerin bir videosunu (Object_detection_video.py kullanarak) kullanabilir veya sadece bir USB web kamerasını takabilir ve nesneye (Object_detection_webcam.py kullanarak) yönlendirebilirsiniz.
 
