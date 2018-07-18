@@ -13,8 +13,10 @@ Thanks to, Tensorflow Object Detection API
 4) Ardından, generate_tfrecord.py dosyasını bir metin düzenleyicide açın. 31. satırdan başlayarak etiket haritasını kendi etiket haritanızla değiştirin, burada her nesneye bir kimlik numarası atanır. Adım 5b'deki labelmap.pbtxt dosyasını yapılandırırken aynı numara ataması kullanılacaktır.
 
 5) Ardından, bu komutları \ object_detection klasöründen yayınlayarak TFRecord dosyalarını oluşturun:
+
 ```
 python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=images\train --output_path=train.record
+
 python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record
 ```
 
